@@ -93,4 +93,3 @@ function equalAdd() {
         console.log(result);
     }
 }
-
