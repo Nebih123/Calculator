@@ -70,6 +70,7 @@ function secondInput() {
     })
 }
 
+
 function equalAdd() {
     switch (sign) {
         case "+":
