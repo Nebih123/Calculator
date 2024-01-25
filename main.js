@@ -1,96 +1,106 @@
-var header = document.querySelector("header")
-var num = document.querySelectorAll("button");
-var plus = document.querySelectorAll("#plus");
-let input = document.createElement("input")
-let inputTwo = document.createElement("input")
-let calculate = false
-function inputCreate() {
-    input.id = "myInput"
-    input.type = "text"
-    input.placeholder = "Type a number..."
-    header.appendChild(input)
-}
-inputCreate()
+// let currentInput = '';
+// let currentOperation = null;
+// let previousInput = null;
 
-var firstNumbers = parseFloat(0)
-var secondNumber = parseFloat(0)
-var sign = 
+// function appendNumber(number) {
+//     currentInput += number;
+//     updateDisplay();
+// }
 
-document.addEventListener("DOMContentLoaded", function() {
-    firstInput()
-});
+// function setOperation(operation) {
+//     if (currentOperation !== null) {
+//         calculateResult();
+//     }
+//     currentOperation = operation;
+//     previousInput = currentInput;
+//     currentInput = '';
+//     updateDisplay();
+// }
 
-function firstInput() {
-    num.forEach(function (button) {
-        button.addEventListener("click", function (event) {
-            if (button.textContent == "+" || button.textContent == "-" || button.textContent == "x" || button.textContent == "/" ) {
-                sign = button.textContent
-                console.log(button.textContent)
-                secondInput()
-            } else if (button.textContent == "+" && calculate == true) {
-                sign = "+"
-                secondInput()
-            } else if (button.textContent == "-" && calculate == true) {
-                sign = "-"
-                secondInput()
-            } else if (button.textContent == "x" && calculate == true) {
-                sign = "*"
-                secondInput()
-            } else if (button.textContent == "/" && calculate == true) {
-                sign = "/"
-                secondInput()
-            } else if (calculate == false){
-                input.value += button.textContent;
-                firstNumbers = input.value 
-            } else {
-                secondInput()
-            }
-        })
-    })
-}
+// function calculateResult() {
+//     if (currentOperation !== null && previousInput !== null && currentInput !== '') {
+//         const num1 = parseFloat(previousInput);
+//         const num2 = parseFloat(currentInput);
+//         switch (currentOperation) {
+//             case '+':
+//                 currentInput = (num1 + num2).toString();
+//                 break;
+//             case '-':
+//                 currentInput = (num1 - num2).toString();
+//                 break;
+//             case '*':
+//                 currentInput = (num1 * num2).toString();
+//                 break;
+//             case '/':
+//                 currentInput = (num1 / num2).toString();
+//                 break;
+//         }
+//         currentOperation = null;
+//         previousInput = null;
+//         updateDisplay();
+//     }
+// }
 
-function secondInput() {
-    calculate = true
-    console.log(firstNumbers)
-    input.remove()
-    inputTwo.id = "myInput"
-    inputTwo.type = "text"
-    inputTwo.placeholder = "Type a number..."
-    header.appendChild(inputTwo)
-    num.forEach(function (button) {
-        button.addEventListener("click", function (event) {
-            if (button.textContent == "=") {
-                equalAdd()
-            } else {
-                inputTwo.value += button.textContent;
-                secondNumber = inputTwo.value 
+// function clearDisplay() {
+//     currentInput = '';
+//     currentOperation = null;
+//     previousInput = null;
+//     updateDisplay();
+// }
 
-            }
-        })
-    })
+// function updateDisplay() {
+//     document.getElementById('display').value = currentInput || '0';
+// }
+
+
+
+
+let currentInput = '';
+let previousInput = null;
+let currentOperation = null;
+
+function appendNumber(number) {
+    currentInput += number;
+    updateDisplay()
 }
 
-
-function equalAdd() {
-    switch (sign) {
-        case "+":
-            result = firstNumbers + secondNumber;
-            break;
-        case "-":
-            result = firstNumbers - secondNumber;
-            break;
-        case "*":
-            result = firstNumbers * secondNumber;
-            break;
-        case "/":
-            result = firstNumbers / secondNumber;
-            break;
-        default:
-            console.log("Invalid sign");
-            break;
+function setOperation(operation) {
+    if (currentOperation !== null) {
+        calculateResult()
     }
-    
-    if (result !== undefined) {
-        console.log(result);
+    currentOperation = operation;
+    previousInput = currentInput;
+    currentInput = ''
+    updateDisplay()
+}
+
+function calculateResult() {
+    if (currentInput !== ''&& previousInput !== null && currentOperation !== null) {
+        let num1 = parseFloat(currentInput);
+        let num2 = parseFloat(previousInput);
+        switch (currentOperation) {
+            case '+': currentInput = (num2 + num1).toString();
+            break
+        case '-': currentInput = (num2 - num1).toString();
+            break
+        case '*': currentInput = (num2 * num1).toString();
+            break
+        case '/': currentInput = (num2 / num1).toString();
+            break
+        }
+        previousInput = null;
+        currentOperation = null;
+        updateDisplay()
     }
+
+}
+function clearDisplay() {
+    currentInput = '';
+    previousInput = null;
+    currentOperation = null;
+    updateDisplay()
+}
+
+function updateDisplay() {
+    document.getElementById('display').value = currentInput || '0';
 }
