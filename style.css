@@ -1,11 +1,32 @@
+html {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 440px;
+}
+
+body {
+    width: 160px
+}
+
+#myInput {
+    width: 156px;
+    margin: 0px;
+    padding: 3px 0px;
+}
+
 footer {
-    width: 145px;
+    width: 160px;
     display: flex;
     flex-wrap: wrap;
 }
 
 button {
-    width: 35px;
-    height: 35px;
+    width: 40px;
+    height: 40px;
+}
+
+.zero {
+    width: 80px;
 }
 
